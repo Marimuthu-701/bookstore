@@ -57,12 +57,16 @@
 	    },
 	    columns: [
 			{data: 'name', name: 'name', title: '{{ trans('common.name') }}'},
+			{data: 'email', name: 'email', title: '{{ trans('common.email') }}'},
+			{data: 'phone', name: 'phone', title: '{{ trans('common.phone') }}'},
+			{data: 'address', name: 'address', title: '{{ trans('common.address') }}'},
 			{data: 'created_at', name: 'created_at', title: '{{ trans('common.created_at') }}', render: function(data, type, row){
                 if(type === "sort" || type === "type"){
                     return data;
                 }
                 return moment(data).format(js_date_time_format);
             }},
+			{data: 'action', name: 'action', title: '{{ trans('common.action') }}', searchable: false, sortable: false, className:"action-wrap"},
 	    ],
 		//	order: [[2, 'desc']],
 		drawCallback: function () {},

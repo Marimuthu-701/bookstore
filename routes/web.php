@@ -19,9 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\PageController::class, 'index'])->name('home');
-Route::get('/about', 'PageController@about')->name('about');
-Route::get('/contact-us', 'PageController@contactUs')->name('contact-us');
 Route::get('/template', function() { return view('mails.user-approved-mail'); });
 
 Route::group(['middleware' => ['auth'] ], function () {

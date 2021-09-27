@@ -35,36 +35,36 @@
                           <div class="col-md-12">
                             <table class="table table-bordered table-striped">
                                 <tr>
-                                    <th>{{ trans('common.title') }}</th>
-                                    <td>{{ $book->title }}</td>
+                                    <th>{{ trans('common.book_name') }}</th>
+                                    <td>{{ $book->name ?? null }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ trans('common.description') }}</th>
-                                    <td>{{ $book->description }}</td>
+                                    <th>{{ trans('common.author_name') }}</th>
+                                    <td>{{ $book->author ? $book->author->name : null }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ trans('common.start_date') }}</th>
-                                    <td>{{ $book->start_date ? dateFormat($book->start_date, 'd-m-Y') : null }}</td>
+                                    <th>{{ trans('common.book_category') }}</th>
+                                    <td>{{ $book->category ? $book->category->name : null }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ trans('common.end_date') }}</th>
-                                    <td>{{ $book->end_date ? dateFormat($book->end_date, 'd-m-Y') : null }}</td>
+                                    <th>{{ trans('common.price') }}</th>
+                                    <td>{{ $book->price ?? null }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ trans('common.duration') }}</th>
-                                    <td>{{ $book->duration }}</td>
+                                    <th>{{ trans('common.total_pages') }}</th>
+                                    <td>{{ $book->pages ?? null }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ trans('common.location') }}</th>
-                                    <td>{{ $book->location }}</td>
+                                    <th>{{ trans('common.publication') }}</th>
+                                    <td>{{ $book->publication }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans('common.edition') }}</th>
+                                    <td>{{ $book->edition }}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ trans('common.status') }}</th>
-                                    <td>{{ $book->status_string }}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('common.payment_type') }}</th>
-                                    <td>{{ $book->payment_type ? Str::ucfirst($book->payment_type) : null }}</td>
+                                    <td>{{ $book->status_string ? $book->status_string : null }}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ trans('common.created_at') }}</th>
@@ -85,7 +85,6 @@
                             </table>
                           </div>
                         </div>
-                        <!--<a href="{{ url()->previous() }}" class="btn btn-default">Back</a>  -->
                     </div>
                   </div>
                 </div>

@@ -37,4 +37,26 @@ class Author extends Model
             ]
         ];
     }
+
+    /**
+     * Set constant Variable
+     * 
+     * @return String
+     */
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
+    /**
+     * Set status scope Attribute
+     * 
+     * @return String
+     */
+    public function getstatusStringAttribute()
+    {
+        $status_str = trans('common.inactive');
+        if ($this->status == self::STATUS_ACTIVE) {
+            $status_str = trans('common.active');
+        }
+        return $status_str;
+    }
 }

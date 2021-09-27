@@ -37,6 +37,8 @@ class Book extends Model
      * @var string
      */
     const BOOK_COVER_PATH = '/books/media/';
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
 
     /**
      * Return the sluggable configuration array for this model.
@@ -71,6 +73,21 @@ class Book extends Model
     {
         return $this->belongsTo(BookCategory::class, 'category_id', 'id');
     }
+
+    /**
+     * Set status scope Attribute
+     * 
+     * @return String
+     */
+    public function getstatusStringAttribute()
+    {
+        $status_str = trans('common.inactive');
+        if ($this->status == self::STATUS_ACTIVE) {
+            $status_str = trans('common.active');
+        }
+        return $status_str;
+    }
+    
 
     /**
      * Get Book Status

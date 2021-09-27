@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Http\Request;
 use DataTables;
+use Flash;
 
 class AuthorController extends Controller
 {
@@ -23,7 +26,7 @@ class AuthorController extends Controller
             })->addColumn('action', function ($query) {
                 return view('admin.partials.action', [
                 'item' => $query,
-                'source' => 'author',
+                'source' => 'authors',
                 'view_btn' => true,
                 'edit_btn' => true,
                 'delete_btn' => true,
@@ -40,7 +43,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.authors.create');
     }
 
     /**
@@ -51,7 +54,28 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'author_name' => 'required',
+            'email'   => 'required|email|unique:authors',
+            'phone'   => 'required|numeric|digits:10',
+            'address' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+
+        $create_author = Author::create([
+            'name' => $request->author_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+        if ($create_author) {
+            Flash::success(trans('messages.author_create'));
+            return redirect()->route('admin.authors.index');
+        }
     }
 
     /**
@@ -62,7 +86,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        return view('admin.authors.show', compact('author'));
     }
 
     /**
@@ -73,7 +97,8 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        $author_status = Book::bookStatus();
+        return view('admin.authors.edit', compact('author', 'author_status'));
     }
 
     /**
@@ -85,7 +110,28 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $rules = [
+            'author_name' => 'required',
+            'email'   => 'required|email|unique:authors,email,'. $author->id,
+            'phone'   => 'required|numeric|digits:10',
+            'address' => 'required',
+            'status'  => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+        
+        $author->name  = $request->author_name;
+        $author->email = $request->email;
+        $author->phone = $request->phone;
+        $author->address = $request->address;
+        $author->status = $request->status;
+        if ($author->save()) {
+            Flash::success(trans('messages.author_update'));
+            return redirect()->route('admin.authors.index');
+        }
     }
 
     /**
@@ -96,6 +142,11 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        if ($author) {
+            if ($author->delete()) {
+                Flash::success(trans('messages.author_delete'));
+                return redirect()->route('admin.authors.index');
+            }
+        }
     }
 }

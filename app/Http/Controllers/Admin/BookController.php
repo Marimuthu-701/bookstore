@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use App\Models\BookCategory;
 use App\Models\Author;
 use App\Models\Book;
@@ -116,7 +117,11 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $bookCategory = BookCategory::get();
+        $authors = Author::get();
+        $in_stock = Book::getStockStatus();
+        $book_status = Book::bookStatus();
+        return view('admin.books.edit', compact('book', 'bookCategory', 'authors', 'in_stock', 'book_status'));
     }
 
     /**
@@ -128,7 +133,38 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        if (!$book) {
+            return redirect()->route('admin.books.index');
+        }
+        $validator = $this->validator($request->all(),  true);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput($request->all())->withErrors($validator->errors());
+        }
+
+        $book->name = $request->book_name;
+        $book->author_id = $request->author_name;
+        $book->category_id = $request->book_category;
+        $book->price = $request->price;
+        $book->pages = $request->total_pages;
+        $book->publication = $request->publication;
+        $book->edition  = $request->edition;
+        $book->in_stock = $request->in_stock;
+        $book->status = $request->status;
+
+        $old_image_name = $book->media;
+        if ($img_file = $request->file('media')) {
+            $image_name = getRandomFileName($img_file);
+            Book::uploadImage($img_file, $image_name);
+            $book->media = $image_name;
+            if ($old_image_name) {
+                Storage::delete(Book::BOOK_COVER_PATH . $old_image_name);
+            }
+        }
+
+        if ($book->save()) {
+            Flash::success(trans('messages.book_update'));
+            return redirect()->route('admin.books.index');
+        }
     }
 
     /**
@@ -139,23 +175,37 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        if ($book) {
+            if ($book->delete()) {
+                Flash::success(trans('messages.book_delete'));
+                return redirect()->route('admin.books.index');
+            }
+        }
     }
 
-    protected function validator(array $data)
+    /** 
+     * Check validation for Add books form
+     * 
+     * @return Array
+     */
+    protected function validator(array $data, $edit = false)
     {
         $rules = [
             'book_name'       => 'required',
             'author_name'     => 'required',
             'book_category'   => 'required',
-            'media'           => 'required|image|mimes:jpeg,png,jpg,svg',
             'price'           => 'required',
             'total_pages'     => 'required',
             'publication'     => 'required',
             'edition'         => 'required',
             'in_stock'        => 'required',
         ];
-
+        if ($edit) {
+            $rules['media'] = 'required_without:old_media|image|mimes:jpeg,png,jpg,svg';
+            $rules['status'] = 'required';
+        } else {
+            $rules['media'] = 'required|image|mimes:jpeg,png,jpg,svg';
+        }
         return Validator::make($data, $rules);
     }
 }

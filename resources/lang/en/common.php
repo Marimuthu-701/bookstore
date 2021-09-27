@@ -55,4 +55,6 @@ return [
 	'yes'			  => 'Yes',
 	'no'			  => 'No',
 	'book_cover'	  => 'Book Cover',
+	'book_edit'		  => 'Book Edit',
+	'author_edit'	  => 'Author Edit',
 ];
