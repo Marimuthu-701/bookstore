@@ -70,13 +70,11 @@
         </main>
         <!-- Footer -->
         <footer class="page-footer font-small blue custom-footer">
-
             <!-- Copyright -->
-            <div class="footer-copyright text-center py-3 bg-primary text-white">© 2020 Copyright:
+            <div class="footer-copyright text-center py-3 bg-primary text-white">© {{date('Y')}} Copyright:
             <a href="#" class="text-white"> {{ env('APP_NAME') }}</a>
             </div>
             <!-- Copyright -->
-        
         </footer>
         <!-- Footer -->
     </div>
