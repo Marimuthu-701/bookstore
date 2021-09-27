@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Book;
+use App\Models\Author;
 use DataTables;
 use Exception;
 use Validator;
@@ -106,7 +108,8 @@ class AdminController extends Controller
     public function dashboard(Request $request)
     {
         $users_count = User::count();
-        $event_count = 0;
-        return view('admin.dashboard', compact('users_count', 'event_count'));
+        $books = Book::count();
+        $authors = Author::count();
+        return view('admin.dashboard', compact('users_count', 'books', 'authors'));
     }
 }

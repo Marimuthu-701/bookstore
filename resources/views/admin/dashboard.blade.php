@@ -56,13 +56,38 @@
                             <img src="{{ asset('images/admin/dashboard_icon/facilities.png') }}">
                         </div>
                         <div class="col-md-8 col-xs-8 text-right">
-                            <div class="title-head panel-count">{{ $event_count ?? null}}</div>
-                            <div class="title-text panel-lable">{{trans('common.events')}}</div>
+                            <div class="title-head panel-count">{{ $books ?? null}}</div>
+                            <div class="title-text panel-lable">{{trans('common.books')}}</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="{{route('admin.books.index')}}">
                     <div class="panel-footer" style="background: #AA85FF;">
+                        <span class="pull-left">View all</span>
+                        <span class="pull-right">
+                            <img src="{{ asset('images/admin/dashboard_icon/arrow.png') }}">
+                        </span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 dash-head-part">
+            <div class="panel blue dash-head-subpart">
+                <div class="panel-heading dash-head-ajax">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-4 text-center">
+                            <img src="{{ asset('images/admin/dashboard_icon/service_provider.png') }}">
+                        </div>
+                        <div class="col-md-8 col-xs-8 text-right">
+                            <div class="title-head panel-count">{{ $authors ?? null}}</div>
+                            <div class="title-text panel-lable">{{trans('common.authors')}}</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{route('admin.authors.index')}}">
+                    <div class="panel-footer" style="background: #399dec;">
                         <span class="pull-left">View all</span>
                         <span class="pull-right">
                             <img src="{{ asset('images/admin/dashboard_icon/arrow.png') }}">
