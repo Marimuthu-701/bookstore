@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/home', 'ProductController@homePage')->name('home');
+Route::get('/', 'ProductController@homePage');
+Route::get('/books/{slug}', 'ProductController@bookInfo')->name('book.info');
 
 Auth::routes();
 

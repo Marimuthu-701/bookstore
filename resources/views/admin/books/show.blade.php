@@ -39,6 +39,10 @@
                                     <td>{{ $book->name ?? null }}</td>
                                 </tr>
                                 <tr>
+                                  <th>{{ trans('common.description') }}</th>
+                                  <td>{{ $book->description ?? null }}</td>
+                              </tr>
+                                <tr>
                                     <th>{{ trans('common.author_name') }}</th>
                                     <td>{{ $book->author ? $book->author->name : null }}</td>
                                 </tr>

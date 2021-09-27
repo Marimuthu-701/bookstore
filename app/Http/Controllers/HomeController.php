@@ -40,9 +40,6 @@ class HomeController extends Controller
             $this->validator($request->all())->validate();
             $user =Auth::user();
             $user->name = $request->name;
-            $user->phone = $request->phone;
-            $user->mobile = $request->mobile;
-            $user->company_name = $request->company_name;
             $user->address = $request->address;
             $user->save();
             if($user->save()){
@@ -58,12 +55,7 @@ class HomeController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'numeric'],
-            'company_name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string'],
         ]);
     }
-
-
 }
 

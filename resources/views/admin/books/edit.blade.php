@@ -42,6 +42,19 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
+                                                <label for="description">{{ trans('common.description') }}<span class="required">&nbsp;*</span></label>
+                                                <textarea type="text" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="description" name="description" placeholder="{{ trans('common.description') }}" autocomplete="off">{{ $book->description ?? old('description') }}</textarea>
+                                                @if($errors->has('description'))
+                                                <div class="invalid-feedback">
+                                                    <strong>{{ $errors->first('description') }}</strong>
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
                                                 <label for="author_name">{{ trans('common.author_name') }}<span class="required">&nbsp;*</span></label>
                                                 <select id="author_name" name="author_name" class="form-control {{ $errors->has('author_name') ? 'is-invalid' : '' }}">
                                                     <option value="">Select</option>

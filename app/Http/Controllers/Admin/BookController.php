@@ -77,6 +77,7 @@ class BookController extends Controller
         }
         $book_data = [
             'name' => $request->book_name,
+            'description' => $request->description,
             'author_id' => $request->author_name,
             'category_id' => $request->book_category,
             'price' => $request->price,
@@ -142,6 +143,7 @@ class BookController extends Controller
         }
 
         $book->name = $request->book_name;
+        $book->description = $request->description;
         $book->author_id = $request->author_name;
         $book->category_id = $request->book_category;
         $book->price = $request->price;
@@ -192,6 +194,7 @@ class BookController extends Controller
     {
         $rules = [
             'book_name'       => 'required',
+            'description'     => 'required',
             'author_name'     => 'required',
             'book_category'   => 'required',
             'price'           => 'required',

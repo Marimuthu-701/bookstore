@@ -1,113 +1,81 @@
 @extends('layouts.app')
-
 @section('content')
-@guest
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Home') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are in Home!') }}
-                </div>
-            </div>
+  <div class="container">
+    <section class="home-banner">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="{{ asset('images/web/banner-1.jpg') }}" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="{{ asset('images/web/banner-2.jpg') }}" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="{{ asset('images/web/banner-3.jpg') }}" alt="Third slide">
+          </div>
         </div>
-    </div>
-</div>
- @else
-<div class="container">
-    <div class="row justify-content-center">
-            <div class="col-md-12 grid-margin-md stretch-card d-flex_">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="card-header">Events</div>
-                    <!-- <div class="d-flex justify-content-between mb-3">
-                        <h4 class="card-title">Events</h4>
-                    </div> -->
-
-
-                    <div class="border p-3 mb-3">
-                      <div class="border-bottom pb-3">
-                        <div class="row">
-                            <div class="col-sm-4 border-right-lg border-right-md-0">
-                              <div class="d-flex justify-content-center align-items-center">
-                                <h1 class="mb-0 mr-2 text-primary font-weight-normal">04</h1>
-                                  <div>
-                                    <p class="font-weight-bold mb-0 text-dark">Feb</p>
-                                    <p class="mb-0">2018</p>
-                                  </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-8 pl-3">
-                              <p class="text-dark font-weight-bold mb-0">Lorem ipsum dolor sit amit</p>
-                              <p class="mb-0">9.30 PM - 10:30 PM</p>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="border-bottom pt-3 pb-3">
-                          <div class="row">
-                              <div class="col-sm-4 border-right-lg border-right-md-0">
-                                <div class="d-flex justify-content-center align-items-center">
-                                  <h1 class="mb-0 mr-2 text-primary font-weight-normal">15</h1>
-                                    <div>
-                                      <p class="font-weight-bold mb-0 text-dark">Mar</p>
-                                      <p class="mb-0">2018</p>
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-8 pl-3">
-                                <p class="text-dark font-weight-bold mb-0">Lorem ipsum dolor sit amit</p>
-                                <p class="mb-0">10.00 PM - 12:30 PM</p>
-                              </div>
-                            </div>
-                        </div>
-                          <div class="border-bottom pb-3 pt-3">
-                            <div class="row">
-                                <div class="col-sm-4 border-right-lg border-right-md-0">
-                                  <div class="d-flex justify-content-center align-items-center">
-                                    <h1 class="mb-0 mr-2 text-primary font-weight-normal">22</h1>
-                                      <div>
-                                        <p class="font-weight-bold mb-0 text-dark">Apr</p>
-                                        <p class="mb-0">2018</p>
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="col-sm-8 pl-3">
-                                  <p class="text-dark font-weight-bold mb-0">Lorem ipsum dolor sit amit</p>
-                                  <p class="mb-0">9.30 PM - 10:30 PM</p>
-                                </div>
-                              </div>
-                          </div>
-                          <div class="pt-3">
-                              <div class="row">
-                                  <div class="col-sm-4 border-right-lg border-right-md-0">
-                                    <div class="d-flex justify-content-center align-items-center">
-                                      <h1 class="mb-0 mr-2 text-primary font-weight-normal">26</h1>
-                                        <div>
-                                          <p class="font-weight-bold mb-0 text-dark">Jun</p>
-                                          <p class="mb-0">2018</p>
-                                        </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-8 pl-3">
-                                    <p class="text-dark font-weight-bold mb-0">Lorem ipsum dolor sit amit</p>
-                                    <p class="mb-0">10.00 PM - 12:30 PM</p>
-                                  </div>
-                                </div>
-                            </div>
-                    </div>
-
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </section>
+    <section class="product-list py-4">
+      <h2 class="mb-3 font-weight-bold">{{ trans('common.books') }}</h2>
+      @if (count($books) > 0)
+      <div class="row">
+        @foreach ($books as $key => $item)
+          @if ($item->media)
+            @php
+              $media_url = storage_url(App\Models\Book::BOOK_COVER_PATH . $item->media);
+              @endphp
+          @else
+            @php
+              $media_url = asset('images/web/books/book-4.jpg');
+            @endphp 
+          @endif
+            <div class="col-lg-3 py-3">
+              <div class="card">
+                <img class="card-img-top book-cover-img" src="{{ $media_url }}" alt="Card image cap">
+                <div class="card-body text-center">
+                  <h5 class="card-title">{{ $item->name }}</h5>
+                  <p class="card-text">{{ Str::limit($item->description, 100, '...') }}</p>
+                  <div class="text-center">
+                    <a href="{{ route('book.info', ['slug'=> $item->slug]) }}" class="btn btn-primary text-center">View Book</a>
                   </div>
                 </div>
+              </div>
             </div>
-    </div>
-</div>
-@endguest
+        @endforeach
+      </div>
+      @else
+          <div class="row">
+            <div class="col-lg-12">
+              <p>{{ trans('messages.data_not_found') }}</p>
+            </div>
+          </div>
+      @endif
+      
+    </section>
+    <section class="footer-setion">
+      Hi
+    </section>
+  </div>
+@endsection
+
+@section('js')
+  <script type="text/javascript">
+    $(document).ready(function() {
+      console.log('Herer loader');
+    })
+  </script>
 @endsection

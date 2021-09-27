@@ -76,10 +76,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255', 'alpha_spaces'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'numeric', 'digits:10'],
-            'mobile' => ['required', 'numeric', 'digits:10'],
-            'company_name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed', 'password_rules'],
         ]);
     }
@@ -95,23 +91,8 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'mobile' => $data['mobile'],
-            'company_name' => $data['company_name'],
-            'address' => $data['address'],
             'password' => Hash::make($data['password']),
         ]);
-
-        // The entry use for userpayment details and type
-        if ($user) {
-            UserPayment::create([
-                'user_id' => $user->id,
-                'payment_mode_id' => defaultPaymentMode(),
-                'amount' => 0,
-                'payment_type'=> UserPayment::PAYMENT_TYPE_REGISTER
-            ]);
-        }
-
         return $user;
     }
 }
