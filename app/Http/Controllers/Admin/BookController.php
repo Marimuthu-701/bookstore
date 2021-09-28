@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\BookCategory;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use DataTables;
 use Flash;
@@ -60,7 +61,8 @@ class BookController extends Controller
         $bookCategory = BookCategory::get();
         $authors = Author::get();
         $in_stock = Book::getStockStatus();
-        return view('admin.books.create', compact('bookCategory', 'authors', 'in_stock'));
+        $tags = Tag::where('status', 1)->get();
+        return view('admin.books.create', compact('bookCategory', 'authors', 'in_stock', 'tags'));
     }
 
     /**
@@ -93,6 +95,10 @@ class BookController extends Controller
             $create_book->media = $image_name;
         }
         $create_book->save();
+        $tags = isset($request->tags) ? array_filter($request->tags) : [];
+        if (count($tags) > 0) {
+            $create_book->tags()->sync($tags);
+        }
         Flash::success(trans('messages.book_create'));
         return redirect()->route('admin.books.index');
     }
@@ -122,7 +128,9 @@ class BookController extends Controller
         $authors = Author::get();
         $in_stock = Book::getStockStatus();
         $book_status = Book::bookStatus();
-        return view('admin.books.edit', compact('book', 'bookCategory', 'authors', 'in_stock', 'book_status'));
+        $tags = Tag::where('status', 1)->get();
+        $book_tags = $book->tags()->get()->pluck('id')->toArray();
+        return view('admin.books.edit', compact('book', 'bookCategory', 'authors', 'in_stock', 'book_status', 'tags', 'book_tags'));
     }
 
     /**
@@ -162,8 +170,11 @@ class BookController extends Controller
                 Storage::delete(Book::BOOK_COVER_PATH . $old_image_name);
             }
         }
-
         if ($book->save()) {
+            $tags = isset($request->tags) ? array_filter($request->tags) : [];
+            if (count($tags) > 0) {
+                $book->tags()->sync($tags);
+            }
             Flash::success(trans('messages.book_update'));
             return redirect()->route('admin.books.index');
         }

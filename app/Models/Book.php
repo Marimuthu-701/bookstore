@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Storage;
+use App\Contracts\ReviewRateable;
+use App\Traits\ReviewRateableTrait;
+
 use Image;
 
 class Book extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, ReviewRateableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -73,6 +76,16 @@ class Book extends Model
     public function category()
     {
         return $this->belongsTo(BookCategory::class, 'category_id', 'id');
+    }
+
+    /**
+     * Tags book details
+     * 
+     * @return App\Models\Tag
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, BookTag::class, 'book_id', 'tag_id');
     }
 
     /**

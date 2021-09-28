@@ -18,19 +18,15 @@ Route::get('/', 'ProductController@homePage');
 Route::get('/books/{slug}', 'ProductController@bookInfo')->name('book.info');
 
 Auth::routes();
-
-Route::get('/template', function() { return view('mails.user-approved-mail'); });
-
 Route::group(['middleware' => ['auth'] ], function () {
-
 	Route::get('/profile', 'HomeController@profile')->name('profile');
 	Route::get('/profile/edit', 'HomeController@profileEdit')->name('profile.edit');
 	Route::post('/profile/update', 'HomeController@profileUpdate')->name('profile.update');
 
-
 	Route::get('/password', 'HomeController@passwordChange')->name('password');
 	Route::get('/password/edit', 'HomeController@passwordChangeEdit')->name('password.edit');
 	Route::post('/password/update', 'HomeController@passwordChangeUpdate')->name('password.update');
+	Route::post('/books/add-comment-review', 'ProductController@createCommentReview')->name('review-comments');
 
 	Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 });

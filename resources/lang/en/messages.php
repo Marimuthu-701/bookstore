@@ -19,6 +19,9 @@ return [
     'author_create'                  => 'Author created successfully',
     'author_delete'  				 => 'Author deleted successfully',
     'author_update'                  => 'Author updated successfully',
+    'rating_and_review_message'      => 'Thanks for your feedback!',
+    'exit_error_rating'              => 'Already Exist!',
+    'tag_create_message'             => 'Tag created succefully',
 
     // Below key are used email subject
     'account_approved_notification' => 'Account Approved Notification',

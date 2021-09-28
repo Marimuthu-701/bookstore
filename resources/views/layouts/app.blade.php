@@ -11,6 +11,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -18,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm topnavbar">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm topnavbar mb-1">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -72,7 +75,7 @@
         <!-- Footer -->
         <footer class="page-footer font-small blue custom-footer">
             <!-- Copyright -->
-            <div class="footer-copyright text-center py-3 bg-primary text-white">© {{date('Y')}} Copyright:
+            <div class="footer-copyright text-center py-3 text-white">© {{date('Y')}} Copyright:
             <a href="#" class="text-white"> {{ env('APP_NAME') }}</a>
             </div>
             <!-- Copyright -->

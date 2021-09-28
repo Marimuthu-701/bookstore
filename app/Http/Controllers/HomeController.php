@@ -40,7 +40,6 @@ class HomeController extends Controller
             $this->validator($request->all())->validate();
             $user =Auth::user();
             $user->name = $request->name;
-            $user->address = $request->address;
             $user->save();
             if($user->save()){
                 return redirect()->route('profile')->with('message','Profile Updated');

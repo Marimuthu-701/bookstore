@@ -67,6 +67,13 @@
                                     <td>{{ $book->edition }}</td>
                                 </tr>
                                 <tr>
+                                  <th>{{ trans('common.tags') }}</th>
+                                  @php
+                                      $tags = $book->tags()->get()->pluck('name')->toArray();
+                                  @endphp
+                                  <td>{{ count($tags) > 0 ? implode(', ', $tags) : ''}}</td>
+                              </tr>
+                                <tr>
                                     <th>{{ trans('common.status') }}</th>
                                     <td>{{ $book->status_string ? $book->status_string : null }}</td>
                                 </tr>

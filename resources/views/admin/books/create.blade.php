@@ -92,6 +92,27 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
+                                                <label for="tags">{{ trans('common.tags') }}<span class="required">&nbsp;*</span></label>
+                                                <select id="tags" name="tags[]" class="form-control {{ $errors->has('tags') ? 'is-invalid' : '' }}" multiple>
+                                                    <option value="">Select</option>
+                                                    @if(count($tags) > 0)
+                                                        @foreach($tags as $key => $value)
+                                                            <option value="{{ $value->id }}"  @if(!empty(old('tags')) && ($key == old('tags'))) selected @endif>{{ $value->name }}</option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                @if($errors->has('tags'))
+                                                    <div class="invalid-feedback">
+                                                        <strong>{{ $errors->first('tags') }}</strong>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
                                                 <label for="media">{{ trans('common.book_cover') }}<span class="required">&nbsp;*</span></label>
                                                 <div class="custom-file">
                                                     <input type="file" name="media" class="custom-file-input {{ $errors->has('media') ? 'is-invalid' : '' }}" id="media" lang="es">

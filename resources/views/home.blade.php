@@ -44,11 +44,21 @@
             @endphp 
           @endif
             <div class="col-lg-3 py-3">
-              <div class="card">
+              <div class="card book-grid-card">
                 <img class="card-img-top book-cover-img" src="{{ $media_url }}" alt="Card image cap">
                 <div class="card-body text-center">
                   <h5 class="card-title">{{ $item->name }}</h5>
-                  <p class="card-text">{{ Str::limit($item->description, 100, '...') }}</p>
+                  @php
+                      $tags = $item->tags()->get()->pluck('name')->toArray();
+                  @endphp
+                  <div class="tag-section mb-2 text-success">
+                    @if (count($tags) > 0)
+                        <i class="fas fa-tags"></i>{{ Str::limit(implode(', ', $tags), 50, '...') }}       
+                    @endif
+                  </div>
+                  <div class="book-description">
+                    <p class="card-text">{{ Str::limit($item->description, 100, '...') }}</p>
+                  </div>
                   <div class="text-center">
                     <a href="{{ route('book.info', ['slug'=> $item->slug]) }}" class="btn btn-primary text-center">View Book</a>
                   </div>

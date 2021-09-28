@@ -30,4 +30,5 @@ Route::group(['middleware' => 'admin', 'as' => 'admin.', 'namespace'=>'Admin'], 
 
     Route::resource('books', 'BookController');
     Route::resource('authors', 'AuthorController');
+    Route::resource('tags', 'TagController');
 });

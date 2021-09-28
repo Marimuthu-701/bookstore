@@ -14,59 +14,25 @@
                 <div class="card-header">{{ __('Profile') }}</div>
 
                 <div class="card-body">
-
-                        <div class="form-group row">
-                            <label for="company_name" class="col-md-4 col-form-label text-md-right">{{ __('Business Name') }} :</label>
-                            <div class="col-md-6 col-form-label">
-                                {{Auth::guard('web')->user()->company_name}}
-                            </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Username / Contact Person') }} : </label>
+                        <div class="col-md-6 col-form-label">
+                            {{Auth::guard('web')->user()->name}}
                         </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Username / Contact Person') }} : </label>
-                            <div class="col-md-6 col-form-label">
-                                {{Auth::guard('web')->user()->name}}
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }} : </label>
+                        <div class="col-md-6 col-form-label">
+                            {{Auth::guard('web')->user()->email}}
                         </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }} : </label>
-
-                            <div class="col-md-6 col-form-label">
-                                {{Auth::guard('web')->user()->email}}
-                            </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-5">
+                            <a href="{{ route('profile.edit') }}" type="submit" class="btn btn-primary">
+                                {{ __('Edit') }}
+                            </a>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Business Telephone') }} :</label>
-                            <div class="col-md-6 col-form-label">
-                                {{Auth::guard('web')->user()->mobile}}
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Mobile') }} :</label>
-                            <div class="col-md-6 col-form-label">
-                                {{Auth::guard('web')->user()->phone}}
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }} :</label>
-                            <div class="col-md-6 col-form-label">
-                                {{Auth::guard('web')->user()->address}}
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-5">
-                                <a href="{{ route('profile.edit') }}" type="submit" class="btn btn-primary">
-                                    {{ __('Edit') }}
-                                </a>
-                            </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

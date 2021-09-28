@@ -279,6 +279,11 @@ return [
             'url'  => $admin_prefix. '/authors',
             'icon' => 'fas fa-chalkboard-teacher',
         ],
+        [
+            'text' => 'tags',
+            'url'  => $admin_prefix. '/tags',
+            'icon' => 'fas fa-tags',
+        ],
         /*[
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',

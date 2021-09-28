@@ -58,4 +58,5 @@ return [
 	'book_edit'		  => 'Book Edit',
 	'author_edit'	  => 'Author Edit',
 	'description'	  => 'Description',
+	'tags'			  => 'Tags',
 ];
