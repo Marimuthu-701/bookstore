@@ -48,3 +48,12 @@ function storage_url($file = '', $disk = '')
     }
     return $url;
 }
+
+//Added Price
+function moneySymbol($amount = null) 
+{
+    if ($amount) {
+        return '₹ ' . $amount;
+    }
+    return $amount;
+}

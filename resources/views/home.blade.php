@@ -64,10 +64,6 @@
             </div>
           </div>
       @endif
-      
-    </section>
-    <section class="footer-setion">
-      Hi
     </section>
   </div>
 @endsection
