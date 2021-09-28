@@ -139,10 +139,23 @@
 </div>
 @section('js')
 <script type="text/javascript">
-    $('#myTab a').on('click', function (e) {
-        e.preventDefault()
-        $(this).tab('show')
+    $(document).ready(function(){
+        $("#gallery-reviews a").click(function(e){
+            e.preventDefault();
+            $(this).tab("show");
+        });
+        
+        $('.customer-rating').rating({
+            min: 0,
+            max: 5,
+            step: 1,
+            size: 'xs',
+            showClear: false,
+            displayOnly:true,
+            showCaption:false,
+        });
     });
+
 </script>
 @endsection
 @endsection
